@@ -2,359 +2,344 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BB-8 Interativo</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Raleway');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BB-8 Interativo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background: #2c2d2d;
-            overflow: hidden;
-            font-family: 'Raleway', sans-serif;
-        }
+    body {
+      background: #2c2d2d;
+      overflow: hidden;
+      font-family: 'Raleway', sans-serif;
+    }
 
-        /* Fundo estrelado */
-        .stars {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            top: 0;
-            left: 0;
-            box-shadow:
-                50px 100px white,
-                200px 300px white,
-                400px 150px white,
-                500px 150px white,
-                600px 80px white,
-                800px 200px white,
-                1000px 50px white,
-                1200px 400px white,
-                300px 500px white,
-                700px 600px white,
-                1100px 300px white,
-                1300px 150px white,
-                900px 450px white,
-                1500px 250px white,
-                1600px 500px white;
-            animation: twinkle 2s infinite alternate;
-            z-index: -2;
-        }
+     /* Stars */
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: blink 2s infinite alternate;
+      z-index: -2;
+    }
 
-        @keyframes twinkle {
-            from {
-                opacity: 0.3;
-            }
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.2; }
+    }
 
-            to {
-                opacity: 1;
-            }
-        }
+    h2 {
+      color: #ccc;
+      text-align: center;
+      margin-top: 20px;
+      transition: opacity 0.8s;
+    }
 
-        h2 {
-            color: #ccc;
-            text-align: center;
-            margin-top: 20px;
-            transition: opacity 0.8s;
-        }
+    h2.hide {
+      opacity: 0;
+    }
 
-        h2.hide {
-            opacity: 0;
-        }
+    .sand {
+      background: #B69C77;
+      height: 30%;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      z-index: -1;
+    }
 
-        .sand {
-            background: #B69C77;
-            height: 30%;
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-            z-index: -1;
-        }
+    /* BB-8 */
+    .bb8 {
+      position: absolute;
+      bottom: 20%;
+      left: 0;
+      width: 140px;
+      margin-left: -70px;
+    }
 
-        /* BB-8 */
-        .bb8 {
-            position: absolute;
-            bottom: 20%;
-            left: 0;
-            width: 140px;
-            margin-left: -70px;
-        }
+    .antennas {
+      position: absolute;
+      left: 22%;
+      transition: left 0.6s;
+    }
 
-        .antennas {
-            position: absolute;
-            left: 22%;
-            transition: left 0.6s;
-        }
+    .antennas.right {
+      left: 0%;
+    }
 
-        .antennas.right {
-            left: 0%;
-        }
+    .antenna {
+      position: absolute;
+      width: 2px;
+      background: #e0d2be;
+    }
 
-        .antenna {
-            position: absolute;
-            width: 2px;
-            background: #e0d2be;
-        }
+    .antenna.short {
+      height: 20px;
+      top: -60px;
+      left: 50px;
+    }
 
-        .antenna.short {
-            height: 20px;
-            top: -60px;
-            left: 50px;
-        }
+    .antenna.long {
+      height: 36px;
+      top: -78px;
+      left: 56px;
+      border-top: 6px solid #020204;
+      border-bottom: 6px solid #020204;
+    }
 
-        .antenna.long {
-            height: 36px;
-            top: -78px;
-            left: 56px;
-            border-top: 6px solid #020204;
-            border-bottom: 6px solid #020204;
-        }
+    .head {
+      position: absolute;
+      top: -46px;
+      left: 50%;
+      width: 90px;
+      height: 56px;
+      margin-left: -45px;
+      background: #e0d2be;
+      border-radius: 90px 90px 14px 14px;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-        .head {
-            position: absolute;
-            top: -46px;
-            left: 50%;
-            width: 90px;
-            height: 56px;
-            margin-left: -45px;
-            background: #e0d2be;
-            border-radius: 90px 90px 14px 14px;
-            overflow: hidden;
-            z-index: 1;
-        }
+    .head .stripe {
+      position: absolute;
+      width: 100%;
+    }
 
-        .head .stripe {
-            position: absolute;
-            width: 100%;
-        }
+    .head .stripe.one {
+      top: 6px;
+      height: 6px;
+      background: #999;
+      opacity: 0.8;
+    }
 
-        .head .stripe.one {
-            top: 6px;
-            height: 6px;
-            background: #999;
-            opacity: 0.8;
-        }
+    .head .stripe.two {
+      top: 17px;
+      height: 4px;
+      background: #CD7640;
+    }
 
-        .head .stripe.two {
-            top: 17px;
-            height: 4px;
-            background: #CD7640;
-        }
+    .head .stripe.three {
+      bottom: 3px;
+      height: 4px;
+      background: #999;
+      opacity: 0.5;
+    }
 
-        .head .stripe.three {
-            bottom: 3px;
-            height: 4px;
-            background: #999;
-            opacity: 0.5;
-        }
+    .eyes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0%;
+      transition: left 0.6s;
+    }
 
-        .eyes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0%;
-            transition: left 0.6s;
-        }
+    .eyes.right {
+      left: 36%;
+    }
 
-        .eyes.right {
-            left: 36%;
-        }
+    .eye {
+      position: absolute;
+      border-radius: 50%;
+      display: block;
+    }
 
-        .eye {
-            position: absolute;
-            border-radius: 50%;
-            display: block;
-        }
+    .eye.one {
+      top: 12px;
+      left: 12%;
+      width: 30px;
+      height: 30px;
+      background: #020204;
+      border: 4px solid #e0d2be;
+    }
 
-        .eye.one {
-            top: 12px;
-            left: 12%;
-            width: 30px;
-            height: 30px;
-            background: #020204;
-            border: 4px solid #e0d2be;
-        }
+    .eye.one::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      top: 4px;
+      right: 4px;
+    }
 
-        .eye.one::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            border-radius: 50%;
-            top: 4px;
-            right: 4px;
-        }
+    .eye.two {
+      top: 30px;
+      left: 40%;
+      width: 16px;
+      height: 16px;
+      background: #e0d2be;
+      border: 1px solid #020204;
+    }
 
-        .eye.two {
-            top: 30px;
-            left: 40%;
-            width: 16px;
-            height: 16px;
-            background: #e0d2be;
-            border: 1px solid #020204;
-        }
+    .eye.two::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #020204;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+    }
 
-        .eye.two::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #020204;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-        }
+    .ball {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      background: #d1c3ad;
+      border-radius: 50%;
+      overflow: hidden;
+    }
 
-        .ball {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            background: #d1c3ad;
-            border-radius: 50%;
-            overflow: hidden;
-        }
+    .lines {
+      position: absolute;
+      border: 2px solid #B19669;
+      border-radius: 50%;
+      width: 400px;
+      height: 400px;
+      opacity: 0.6;
+    }
 
-        .lines {
-            position: absolute;
-            border: 2px solid #B19669;
-            border-radius: 50%;
-            width: 400px;
-            height: 400px;
-            opacity: 0.6;
-        }
+    .lines.two {
+      top: 10px;
+      left: -250px;
+    }
 
-        .lines.two {
-            top: 10px;
-            left: -250px;
-        }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      background: #CD7640;
+    }
 
-        .ring {
-            position: absolute;
-            border-radius: 50%;
-            background: #CD7640;
-        }
+    .ring::after {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      top: 50%;
+      left: 50%;
+      margin-left: -35%;
+      margin-top: -35%;
+      background: #d1c3ad;
+      border-radius: 50%;
+    }
 
-        .ring::after {
-            content: '';
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            top: 50%;
-            left: 50%;
-            margin-left: -35%;
-            margin-top: -35%;
-            background: #d1c3ad;
-            border-radius: 50%;
-        }
+    .ring.one {
+      width: 70px;
+      height: 70px;
+      top: 20px;
+      left: 30px;
+    }
 
-        /* Anéis */
-        .ring.one {
-            width: 70px;
-            height: 70px;
-            top: 20px;
-            left: 30px;
-            /* centralizado levemente à esquerda */
-        }
+    .ring.two {
+      width: 70px;
+      height: 70px;
+      top: 80px;
+      left: 100px;
+      transform: rotate(36deg);
+    }
 
-        .ring.two {
-            width: 70px;
-            height: 70px;
-            top: 80px;
-            left: 100px;
-            transform: rotate(36deg);
-        }
-
-        .ring.three {
-            width: 50px;
-            height: 50px;
-            top: 102px;
-            left: -16px;
-            transform: rotate(-10deg);
-        }
-    </style>
+    .ring.three {
+      width: 50px;
+      height: 50px;
+      top: 102px;
+      left: -16px;
+      transform: rotate(-10deg);
+    }
+  </style>
 </head>
 
 <body>
-    <div class="stars"></div>
-    <h2>Mova o mouse</h2>
+  <!-- Céu estrelado -->
+  <h2>Mova o mouse</h2>
 
-    <div class="sand"></div>
+  <div class="sand"></div>
 
-    <div class="bb8">
-        <div class="antennas">
-            <div class="antenna short"></div>
-            <div class="antenna long"></div>
-        </div>
-        <div class="head">
-            <div class="stripe one"></div>
-            <div class="stripe two"></div>
-            <div class="eyes">
-                <div class="eye one"></div>
-                <div class="eye two"></div>
-            </div>
-            <div class="stripe three"></div>
-        </div>
-        <div class="ball">
-            <div class="lines one"></div>
-            <div class="lines two"></div>
-            <div class="ring one"></div>
-            <div class="ring two"></div>
-            <div class="ring three"></div>
-        </div>
-        <div class="shadow"></div>
+  <div class="bb8">
+    <div class="antennas">
+      <div class="antenna short"></div>
+      <div class="antenna long"></div>
     </div>
+    <div class="head">
+      <div class="stripe one"></div>
+      <div class="stripe two"></div>
+      <div class="eyes">
+        <div class="eye one"></div>
+        <div class="eye two"></div>
+      </div>
+      <div class="stripe three"></div>
+    </div>
+    <div class="ball">
+      <div class="lines one"></div>
+      <div class="lines two"></div>
+      <div class="ring one"></div>
+      <div class="ring two"></div>
+      <div class="ring three"></div>
+    </div>
+    <div class="shadow"></div>
+  </div>
 
-    <script>
-        const bb8 = document.querySelector('.bb8');
-        const ball = document.querySelector('.ball');
-        const antennas = document.querySelector('.antennas');
-        const eyes = document.querySelector('.eyes');
-        const h2 = document.querySelector('h2');
+  <script>
+    const bb8 = document.querySelector('.bb8');
+    const ball = document.querySelector('.ball');
+    const antennas = document.querySelector('.antennas');
+    const eyes = document.querySelector('.eyes');
+    const h2 = document.querySelector('h2');
 
-        let dPos = 0;
-        let dSpeed = 1;
-        const dMinSpeed = 1;
-        const dMaxSpeed = 4;
-        const dAccel = 1.04;
-        let dRot = 0;
-        let movingRight = false;
-        let mPos = window.innerWidth * 0.8;
-        const slowOffset = 120;
+    let dPos = 0;
+    let dSpeed = 1;
+    const dMinSpeed = 1;
+    const dMaxSpeed = 4;
+    const dAccel = 1.04;
+    let dRot = 0;
+    let movingRight = false;
+    let mPos = window.innerWidth * 0.8;
+    const slowOffset = 120;
 
-        function moveDroid() {
-            if (mPos > dPos + 35) {
-                if (!movingRight) { movingRight = true; antennas.classList.add('right'); eyes.classList.add('right'); }
-                if (mPos - dPos > slowOffset) { if (dSpeed < dMaxSpeed) dSpeed *= dAccel; }
-                else if (mPos - dPos < slowOffset) { if (dSpeed > dMinSpeed) dSpeed /= dAccel; }
-                dPos += dSpeed;
-                dRot += dSpeed;
-            } else if (mPos < dPos - 35) {
-                if (movingRight) { movingRight = false; antennas.classList.remove('right'); eyes.classList.remove('right'); }
-                if (dPos - mPos > slowOffset) { if (dSpeed < dMaxSpeed) dSpeed *= dAccel; }
-                else if (dPos - mPos < slowOffset) { if (dSpeed > dMinSpeed) dSpeed /= dAccel; }
-                dPos -= dSpeed;
-                dRot -= dSpeed;
-            }
-            bb8.style.left = `${dPos}px`;
-            ball.style.transform = `rotate(${dRot}deg)`;
-            requestAnimationFrame(moveDroid);
-        }
+    function moveDroid() {
+      if (mPos > dPos + 35) {
+        if (!movingRight) { movingRight = true; antennas.classList.add('right'); eyes.classList.add('right'); }
+        if (mPos - dPos > slowOffset) { if (dSpeed < dMaxSpeed) dSpeed *= dAccel; }
+        else if (mPos - dPos < slowOffset) { if (dSpeed > dMinSpeed) dSpeed /= dAccel; }
+        dPos += dSpeed;
+        dRot += dSpeed;
+      } else if (mPos < dPos - 35) {
+        if (movingRight) { movingRight = false; antennas.classList.remove('right'); eyes.classList.remove('right'); }
+        if (dPos - mPos > slowOffset) { if (dSpeed < dMaxSpeed) dSpeed *= dAccel; }
+        else if (dPos - mPos < slowOffset) { if (dSpeed > dMinSpeed) dSpeed /= dAccel; }
+        dPos -= dSpeed;
+        dRot -= dSpeed;
+      }
+      bb8.style.left = `${dPos}px`;
+      ball.style.transform = `rotate(${dRot}deg)`;
+      requestAnimationFrame(moveDroid);
+    }
 
-        // Eventos mouse e toque
-        document.addEventListener('mousemove', e => { h2.classList.add('hide'); mPos = e.pageX; });
-        document.addEventListener('touchmove', e => { h2.classList.add('hide'); mPos = e.touches[0].pageX; });
+    document.addEventListener('mousemove', e => { h2.classList.add('hide'); mPos = e.pageX; });
+    document.addEventListener('touchmove', e => { h2.classList.add('hide'); mPos = e.touches[0].pageX; });
 
-        moveDroid();
-    </script>
+    moveDroid();
+
+    // Create stars
+    for (let i = 0; i < 30; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.animationDuration = (1 + Math.random() * 2) + "s";
+      document.body.appendChild(star);
+    }
+
+  </script>
 
 </body>
 
