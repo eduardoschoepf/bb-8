@@ -15,9 +15,48 @@
         }
 
         body {
-            background: #869F9D;
+            background: #2c2d2d;
             overflow: hidden;
             font-family: 'Raleway', sans-serif;
+        }
+
+        /* Fundo estrelado */
+        .stars {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            box-shadow:
+                50px 100px white,
+                200px 300px white,
+                400px 150px white,
+                500px 150px white,
+                600px 80px white,
+                800px 200px white,
+                1000px 50px white,
+                1200px 400px white,
+                300px 500px white,
+                700px 600px white,
+                1100px 300px white,
+                1300px 150px white,
+                900px 450px white,
+                1500px 250px white,
+                1600px 500px white;
+            animation: twinkle 2s infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.3;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         h2 {
@@ -241,23 +280,11 @@
             left: -16px;
             transform: rotate(-10deg);
         }
-
-        .shadow {
-            position: absolute;
-            bottom: -8px;
-            left: 5px;
-            width: 140px;
-            height: 23px;
-            background: #3A271C;
-            border-radius: 50%;
-            opacity: 0.7;
-            z-index: -1;
-        }
     </style>
 </head>
 
 <body>
-
+    <div class="stars"></div>
     <h2>Mova o mouse</h2>
 
     <div class="sand"></div>
