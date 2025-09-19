@@ -4,5 +4,5 @@ Animação em **HTML, CSS e JavaScript** que traz o **droide BB-8** que segue o 
 
 >[Você pode testar clicando aqui](https://eduardoschoepf.github.io/bb-8/).  
 
-![BB-8 Interativo](image.png)  
+![BB-8 Interativo](assets/image.png)  
 Inspirado no trabalho incrível de [mdixondesigns](https://mdixondesigns.github.io/).   
